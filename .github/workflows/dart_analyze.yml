@@ -19,29 +19,31 @@ jobs:
         run: |
           git clone https://github.com/flutter/flutter.git
           echo "Flutter installation path: $(pwd)/flutter/bin"
-          echo "export PATH=\"$(pwd)/flutter/bin:$PATH\"" >> $GITHUB_ENV
+          echo "export PATH=$(pwd)/flutter/bin:$PATH" >> $GITHUB_ENV
+          source $GITHUB_ENV
           flutter --version || echo "Flutter not found"
+        shell: bash
 
       - name: Install dependencies
         run: |
-          source $GITHUB_ENV
+          export PATH=$(pwd)/flutter/bin:$PATH
           flutter pub get || echo "flutter pub get failed"
         shell: bash
 
       - name: Run Flutter analyzer
         run: |
-          source $GITHUB_ENV
+          export PATH=$(pwd)/flutter/bin:$PATH
           flutter analyze || echo "flutter analyze failed"
         shell: bash
 
       - name: Install dart_code_metrics
         run: |
-          source $GITHUB_ENV
+          export PATH=$(pwd)/flutter/bin:$PATH
           flutter pub global activate dart_code_metrics || echo "dart_code_metrics installation failed"
         shell: bash
 
       - name: Run dart_code_metrics
         run: |
-          source $GITHUB_ENV
+          export PATH=$(pwd)/flutter/bin:$PATH
           flutter pub global run dart_code_metrics:metrics || echo "dart_code_metrics run failed"
         shell: bash
