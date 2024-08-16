@@ -47,3 +47,10 @@ jobs:
           export PATH=$(pwd)/flutter/bin:$PATH
           flutter pub global run dart_code_metrics:metrics || echo "dart_code_metrics run failed"
         shell: bash
+
+      - name: Upload SARIF results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ./path/to/your/sarif-results.sarif
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
