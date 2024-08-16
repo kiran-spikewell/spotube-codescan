@@ -18,8 +18,8 @@ jobs:
       - name: Set up Flutter
         run: |
           git clone https://github.com/flutter/flutter.git
-          echo "Adding Flutter to PATH"
-          echo "$(pwd)/flutter/bin" >> $GITHUB_ENV
+          export PATH="$PATH:$(pwd)/flutter/bin"
+          echo "PATH is $PATH"
           flutter --version
           flutter channel stable
           flutter upgrade
@@ -27,17 +27,24 @@ jobs:
 
       - name: Install dependencies
         run: |
+          export PATH="$PATH:$(pwd)/flutter/bin"
           flutter pub get
         shell: bash
 
       - name: Run Flutter analyzer
-        run: flutter analyze
+        run: |
+          export PATH="$PATH:$(pwd)/flutter/bin"
+          flutter analyze
         shell: bash
 
       - name: Install dart_code_metrics
-        run: flutter pub global activate dart_code_metrics
+        run: |
+          export PATH="$PATH:$(pwd)/flutter/bin"
+          flutter pub global activate dart_code_metrics
         shell: bash
 
       - name: Run dart_code_metrics
-        run: flutter pub global run dart_code_metrics:metrics
+        run: |
+          export PATH="$PATH:$(pwd)/flutter/bin"
+          flutter pub global run dart_code_metrics:metrics
         shell: bash
