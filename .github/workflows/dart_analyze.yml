@@ -21,13 +21,13 @@ jobs:
           sdk: stable
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
-      - name: Run Dart analyzer
-        run: dart analyze
+      - name: Run Flutter analyzer
+        run: flutter analyze
 
       - name: Install dart_code_metrics
-        run: dart pub global activate dart_code_metrics
+        run: flutter pub global activate dart_code_metrics
 
       - name: Run dart_code_metrics
-        run: dart pub global run dart_code_metrics:metrics
+        run: flutter pub global run dart_code_metrics:metrics
