@@ -1,4 +1,4 @@
-name: Dart Analysis
+name: Flutter Analysis
 
 on:
   push:
@@ -15,10 +15,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Dart
-        uses: dart-lang/setup-dart@v1
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v3
         with:
-          sdk: stable
+          flutter-version: 'stable'
 
       - name: Install dependencies
         run: flutter pub get
